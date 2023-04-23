@@ -1,0 +1,53 @@
+version: '3.8'
+
+x-base-service:
+  &base-service
+  tty: true
+  stdin_open: true
+  command: make boot-startup
+  working_dir: /app
+
+services:
+  ###################
+  # Back end services
+  app:
+    &app
+    <<: *base-service
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    ports:
+      - 3001:4000
+    volumes:
+      - .:/app:cached
+    depends_on:
+      - postgres15
+
+  ########@######
+  # Public images
+  postgres15:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres15:/var/lib/postgresql/data:delegated
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pg@pg.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+    ports:
+      - 80:80
+    volumes:
+      - pgadmin4:/root/.pgadmin:delegated
+    depends_on:
+      - postgres15
+
+volumes:
+  # Public images
+  postgres15:
+  pgadmin4:
