@@ -3,13 +3,14 @@ import userRepository from '@/repositories/user-repository';
 import { paymentRequiredError } from '@/errors/payment-required-error';
 import { notFoundError } from '@/errors';
 import hotelsRepository from '@/repositories/hotels-repository';
+import { prisma } from '@/config';
 
 export async function getHotelsService(userId: number) {
-  const user = await userRepository.findWithHotelAndTicket(userId);
-  const booking = user.Booking[0];
+  // const user = await userRepository.findWithHotelAndTicket(userId);
+  // const booking = user.Booking[0];
   // const enrollment = user.Enrollment[0];
 
-  if (!booking) throw notFoundError();
+  // if (!booking) throw notFoundError();
 
   // const ticket = enrollment.Ticket[0];
 
@@ -17,7 +18,9 @@ export async function getHotelsService(userId: number) {
   //   throw paymentRequiredError();
   // }
 
-  return [booking.Room.Hotel];
+  const hotels = prisma.hotel.findMany();
+
+  return hotels;
 }
 
 export async function getHotelService({ userId, hotelId }: GetHotelRooms) {
