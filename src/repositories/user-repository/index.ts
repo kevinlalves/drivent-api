@@ -15,32 +15,6 @@ async function findByEmail(email: string, select?: Prisma.UserSelect) {
   return prisma.user.findUnique(params);
 }
 
-function findWithHotelAndTicket(id: number) {
-  return prisma.user.findUnique({
-    where: { id },
-    select: {
-      Enrollment: {
-        select: {
-          Ticket: {
-            include: {
-              TicketType: true,
-            },
-          },
-        },
-      },
-      Booking: {
-        select: {
-          Room: {
-            select: {
-              Hotel: true,
-            },
-          },
-        },
-      },
-    },
-  });
-}
-
 async function create(data: Prisma.UserUncheckedCreateInput) {
   return prisma.user.create({
     data,
@@ -49,7 +23,6 @@ async function create(data: Prisma.UserUncheckedCreateInput) {
 
 const userRepository = {
   findByEmail,
-  findWithHotelAndTicket,
   create,
 };
 

@@ -1,5 +1,9 @@
 import { prisma } from '@/config';
 
+function findAll() {
+  return prisma.hotel.findMany();
+}
+
 function findByIdWithRooms(id: number) {
   return prisma.hotel.findUnique({
     where: { id },
@@ -10,5 +14,6 @@ function findByIdWithRooms(id: number) {
 }
 
 export default {
+  findAll,
   findByIdWithRooms,
 };
