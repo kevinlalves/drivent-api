@@ -7,18 +7,35 @@ export async function createTicketType() {
     data: {
       name: faker.name.findName(),
       price: faker.datatype.number(),
-      isRemote: faker.datatype.boolean(),
-      includesHotel: faker.datatype.boolean(),
+      isRemote: false,
+      includesHotel: false,
     },
   });
 }
 
-export async function createTicket(enrollmentId: number, ticketTypeId: number, status: TicketStatus) {
+export async function createTicket(enrollmentId: number, ticketTypeId?: number, status?: TicketStatus) {
   return prisma.ticket.create({
     data: {
       enrollmentId,
-      ticketTypeId,
-      status,
+      ticketTypeId: ticketTypeId || (await createTicketType()).id,
+      status: status || TicketStatus.RESERVED,
+    },
+  });
+}
+
+export async function includeHotelInTicketType() {
+  return prisma.ticketType.updateMany({
+    data: {
+      includesHotel: true,
+    },
+  });
+}
+
+export function payTicket(id: number) {
+  return prisma.ticket.update({
+    where: { id },
+    data: {
+      status: TicketStatus.PAID,
     },
   });
 }
