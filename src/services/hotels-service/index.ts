@@ -18,8 +18,13 @@ export async function getHotelsService(userId: number) {
   //   throw paymentRequiredError();
   // }
 
+  const ticket = await prisma.ticket.findFirst({ include: { TicketType: true } });
+  if (!ticket) throw notFoundError();
+
+  if (!ticket.TicketType.includesHotel || ticket.status !== TicketStatus.PAID) throw paymentRequiredError();
+
   const hotels = await prisma.hotel.findMany();
-  if (!hotels) throw notFoundError();
+  if (hotels.length === 0) throw notFoundError();
 
   return hotels;
 }
