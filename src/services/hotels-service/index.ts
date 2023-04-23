@@ -7,15 +7,15 @@ import hotelsRepository from '@/repositories/hotels-repository';
 export async function getHotelsService(userId: number) {
   const user = await userRepository.findWithHotelAndTicket(userId);
   const booking = user.Booking[0];
-  const enrollment = user.Enrollment[0];
+  // const enrollment = user.Enrollment[0];
 
-  if (!booking || !enrollment) throw notFoundError();
+  if (!booking) throw notFoundError();
 
-  const ticket = enrollment.Ticket[0];
+  // const ticket = enrollment.Ticket[0];
 
-  if (ticket.status === TicketStatus.RESERVED || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel) {
-    throw paymentRequiredError();
-  }
+  // if (ticket.status === TicketStatus.RESERVED || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel) {
+  //   throw paymentRequiredError();
+  // }
 
   return [booking.Room.Hotel];
 }
