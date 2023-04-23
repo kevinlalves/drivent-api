@@ -18,7 +18,8 @@ export async function getHotelsService(userId: number) {
   //   throw paymentRequiredError();
   // }
 
-  const hotels = prisma.hotel.findMany();
+  const hotels = await prisma.hotel.findMany();
+  if (!hotels) throw notFoundError();
 
   return hotels;
 }
