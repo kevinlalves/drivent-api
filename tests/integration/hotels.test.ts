@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import { Address, Booking, Enrollment, Hotel, Room, Ticket, User } from '@prisma/client';
+import { Address, Enrollment, Hotel, Room, Ticket, User } from '@prisma/client';
 import httpStatus from 'http-status';
 import faker from '@faker-js/faker';
 import {
@@ -14,7 +14,6 @@ import {
 import { cleanDb, generateValidToken } from '../helpers';
 import { connectDb } from '@/config';
 import app from '@/app';
-import { unauthorizedError } from '@/errors';
 
 const server = supertest(app);
 
