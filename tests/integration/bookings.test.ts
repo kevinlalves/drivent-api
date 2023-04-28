@@ -13,14 +13,14 @@ beforeAll(() => {
   connectDb();
 });
 
-describe('GET /bookings', () => {
+describe('GET /booking', () => {
   beforeAll(async () => {
     await cleanDb();
   });
 
   describe('when authentication token is not present', () => {
     it('should return https status 401 and error message', async () => {
-      const response = await server.get('/bookings');
+      const response = await server.get('/booking');
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -32,7 +32,7 @@ describe('GET /bookings', () => {
   describe('when authentication token is invalid', () => {
     it('should return https status 401 and error message', async () => {
       const token = 'invalid-jwt-token';
-      const response = await server.get('/bookings').set('Authorization', `Bearer ${token}`);
+      const response = await server.get('/booking').set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -44,7 +44,7 @@ describe('GET /bookings', () => {
   describe('when the authentication token is not present in the sessions table', () => {
     it('should return http status 401 and error message', async () => {
       const token = jwt.sign({ userId: 'dummy works' }, process.env.JWT_SECRET);
-      const response = await server.get('/bookings').set('Authorization', `Bearer ${token}`);
+      const response = await server.get('/booking').set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -65,7 +65,7 @@ describe('GET /bookings', () => {
 
     describe('and there is no booking for the user', () => {
       it('should return https status 404 and error message', async () => {
-        const response = await server.get('/bookings').set('Authorization', `Bearer ${token}`);
+        const response = await server.get('/booking').set('Authorization', `Bearer ${token}`);
 
         expect(response.status).toBe(httpStatus.NOT_FOUND);
         expect(response.body).toEqual({
@@ -83,7 +83,7 @@ describe('GET /bookings', () => {
 
       it('should return https status 200 and the booking', async () => {
         const room = booking.Room;
-        const response = await server.get('/bookings').set('Authorization', `Bearer ${token}`);
+        const response = await server.get('/booking').set('Authorization', `Bearer ${token}`);
 
         expect(response.status).toBe(httpStatus.OK);
         expect(response.body).toEqual({
@@ -102,14 +102,14 @@ describe('GET /bookings', () => {
   });
 });
 
-describe('POST /bookings', () => {
+describe('POST /booking', () => {
   beforeAll(async () => {
     await cleanDb();
   });
 
   describe('when authentication token is not present', () => {
     it('should return https status 401 and error message', async () => {
-      const response = await server.post('/bookings');
+      const response = await server.post('/booking');
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -121,7 +121,7 @@ describe('POST /bookings', () => {
   describe('when authentication token is invalid', () => {
     it('should return https status 401 and error message', async () => {
       const token = 'invalid-jwt-token';
-      const response = await server.post('/bookings').set('Authorization', `Bearer ${token}`);
+      const response = await server.post('/booking').set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -133,7 +133,7 @@ describe('POST /bookings', () => {
   describe('when the authentication token is not present in the sessions table', () => {
     it('should return http status 401 and error message', async () => {
       const token = jwt.sign({ userId: 'dummy works' }, process.env.JWT_SECRET);
-      const response = await server.post('/bookings').set('Authorization', `Bearer ${token}`);
+      const response = await server.post('/booking').set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -154,14 +154,14 @@ describe('POST /bookings', () => {
   });
 });
 
-describe('PUT /bookings/:bookingId', () => {
+describe('PUT /booking/:bookingId', () => {
   beforeAll(async () => {
     await cleanDb();
   });
 
   describe('when authentication token is not present', () => {
     it('should return https status 401 and error message', async () => {
-      const response = await server.put('/bookings/1');
+      const response = await server.put('/booking/1');
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -173,7 +173,7 @@ describe('PUT /bookings/:bookingId', () => {
   describe('when authentication token is invalid', () => {
     it('should return https status 401 and error message', async () => {
       const token = 'invalid-jwt-token';
-      const response = await server.put('/bookings/1').set('Authorization', `Bearer ${token}`);
+      const response = await server.put('/booking/1').set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
@@ -185,7 +185,7 @@ describe('PUT /bookings/:bookingId', () => {
   describe('when the authentication token is not present in the sessions table', () => {
     it('should return http status 401 and error message', async () => {
       const token = jwt.sign({ userId: 'dummy works' }, process.env.JWT_SECRET);
-      const response = await server.put('/bookings/1').set('Authorization', `Bearer ${token}`);
+      const response = await server.put('/booking/1').set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.UNAUTHORIZED);
       expect(response.body).toEqual({
