@@ -1,6 +1,5 @@
 import { NextFunction, Response } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
-import httpStatus from 'http-status';
 import { AuthenticatedRequest, JWTPayload } from '@/middlewares';
 import bookingsService from '@/services/bookings-service';
 
@@ -23,7 +22,7 @@ export async function createBookingHandler(req: AuthenticatedRequest, res: Respo
   try {
     const { id } = await bookingsService.create({ userId, roomId });
 
-    res.status(httpStatus.CREATED).send({ bookingId: id });
+    res.send({ bookingId: id });
   } catch (err) {
     next(err);
   }

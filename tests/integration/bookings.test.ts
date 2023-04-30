@@ -256,7 +256,7 @@ describe('POST /booking', () => {
                     .set('Authorization', `Bearer ${token}`);
                   const booking = await bookingsRepository.findFirst();
 
-                  expect(response.status).toBe(httpStatus.CREATED);
+                  expect(response.status).toBe(httpStatus.OK);
                   expect(response.body).toEqual({
                     bookingId: booking.id,
                   });

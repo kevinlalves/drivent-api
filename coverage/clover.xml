@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1682892132035" clover="3.2.0">
-  <project timestamp="1682892132035" name="All files">
-    <metrics statements="589" coveredstatements="572" conditionals="84" coveredconditionals="63" methods="101" coveredmethods="95" elements="774" coveredelements="730" complexity="0" loc="589" ncloc="589" packages="27" files="67" classes="67"/>
+<coverage generated="1682894843429" clover="3.2.0">
+  <project timestamp="1682894843429" name="All files">
+    <metrics statements="588" coveredstatements="571" conditionals="84" coveredconditionals="63" methods="101" coveredmethods="95" elements="773" coveredelements="729" complexity="0" loc="588" ncloc="588" packages="27" files="67" classes="67"/>
     <package name="src">
       <metrics statements="22" coveredstatements="16" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="2"/>
       <file name="app.ts" path="/app/src/app.ts">
@@ -59,7 +59,7 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="133" coveredstatements="131" conditionals="10" coveredconditionals="8" methods="16" coveredmethods="16"/>
+      <metrics statements="132" coveredstatements="130" conditionals="10" coveredconditionals="8" methods="16" coveredmethods="16"/>
       <file name="authentication-controller.ts" path="/app/src/controllers/authentication-controller.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="11" type="stmt"/>
@@ -72,29 +72,28 @@
         <line num="13" count="2" type="stmt"/>
       </file>
       <file name="bookings-controller.ts" path="/app/src/controllers/bookings-controller.ts">
-        <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-        <line num="3" count="11" type="stmt"/>
-        <line num="5" count="11" type="stmt"/>
-        <line num="7" count="11" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
+        <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="4" count="11" type="stmt"/>
+        <line num="6" count="11" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="19" count="11" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="11" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
         <line num="20" count="6" type="stmt"/>
-        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
         <line num="23" count="6" type="stmt"/>
-        <line num="24" count="6" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="28" count="5" type="stmt"/>
-        <line num="32" count="11" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="31" count="11" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
         <line num="33" count="4" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
         <line num="36" count="4" type="stmt"/>
-        <line num="37" count="4" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="41" count="3" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
       </file>
       <file name="enrollments-controller.ts" path="/app/src/controllers/enrollments-controller.ts">
         <metrics statements="20" coveredstatements="19" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
