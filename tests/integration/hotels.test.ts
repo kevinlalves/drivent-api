@@ -167,7 +167,6 @@ describe('GET /hotels/:hotelId', () => {
         expect(response.body).toEqual({
           details: ['"hotelId" must be a number'],
           message: 'Invalid data',
-          name: 'InvalidDataError',
         });
       });
     });

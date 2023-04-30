@@ -38,4 +38,8 @@ function countReservationsByRoom(roomId: number) {
   });
 }
 
-export default { findByUserIdWithRooms, findById, create, updateRoom, countReservationsByRoom };
+function findFirst() {
+  return prisma.booking.findFirst();
+}
+
+export default { findByUserIdWithRooms, findById, create, updateRoom, countReservationsByRoom, findFirst };

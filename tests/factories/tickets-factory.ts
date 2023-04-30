@@ -1,5 +1,6 @@
 import faker from '@faker-js/faker';
-import { TicketStatus } from '@prisma/client';
+import { TicketStatus, User } from '@prisma/client';
+import { createEnrollmentWithAddress } from './enrollments-factory';
 import { prisma } from '@/config';
 
 export async function createTicketType() {
@@ -13,10 +14,10 @@ export async function createTicketType() {
   });
 }
 
-export async function createTicket(enrollmentId: number, ticketTypeId?: number, status?: TicketStatus) {
+export async function createTicket(enrollmentId?: number, ticketTypeId?: number, status?: TicketStatus, user?: User) {
   return prisma.ticket.create({
     data: {
-      enrollmentId,
+      enrollmentId: enrollmentId || (await createEnrollmentWithAddress(user)).id,
       ticketTypeId: ticketTypeId || (await createTicketType()).id,
       status: status || TicketStatus.RESERVED,
     },

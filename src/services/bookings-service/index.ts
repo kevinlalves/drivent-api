@@ -1,16 +1,16 @@
 import { TicketStatus } from '@prisma/client';
-import ticketService from '../tickets-service';
 import { notFoundError } from '@/errors';
 import bookingsRepository from '@/repositories/bookings-repository';
 import { forbiddenError } from '@/errors/forbidden-error';
 import roomsRepository from '@/repositories/rooms-repository';
+import ticketsRepository from '@/repositories/tickets-repository';
 
 async function checkRoomAvailability(roomId: number) {
   const room = await roomsRepository.findById(roomId);
   if (!room) throw notFoundError();
 
-  const roomReservantions = await bookingsRepository.countReservationsByRoom(roomId);
-  if (roomReservantions > room.capacity) throw forbiddenError();
+  const roomReservations = await bookingsRepository.countReservationsByRoom(roomId);
+  if (roomReservations === room.capacity) throw forbiddenError();
 }
 
 async function show(userId: number) {
@@ -21,7 +21,7 @@ async function show(userId: number) {
 }
 
 async function create({ userId, roomId }: { userId: number; roomId: number }) {
-  const ticket = await ticketService.getTicketByUserId(userId);
+  const ticket = await ticketsRepository.findByUserId(userId);
   if (!ticket) throw forbiddenError();
 
   if (ticket.status !== TicketStatus.PAID || !ticket.TicketType.includesHotel) throw forbiddenError();
@@ -35,7 +35,7 @@ async function create({ userId, roomId }: { userId: number; roomId: number }) {
 
 async function updateRoom({ bookingId, roomId }: { bookingId: number; roomId: number }) {
   const booking = await bookingsRepository.findById(bookingId);
-  if (!booking) throw notFoundError();
+  if (!booking) throw forbiddenError();
 
   await checkRoomAvailability(roomId);
 
